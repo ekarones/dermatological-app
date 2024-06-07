@@ -2,8 +2,8 @@ import smtplib
 from email.message import EmailMessage
 
 asunto = "Resultado de predicción de enfermedad dermatológica"
-remitente = "amadaxiomara36@gmail.com"
-contraseña = "vwsv ybnp qztn oolf"
+remitente = "citas.emedicsalud@gmail.com"
+contraseña = "omxv zkjy subd ogfq"
 consejos = {
     "Psoriasis": """
     Mantén tu piel hidratada: Usa cremas hidratantes espesas para evitar la sequedad y reducir la picazón.
