@@ -1,0 +1,52 @@
+{% extends "interface_patient.html" %}
+{% block ul %}
+<ul class="nav_list">
+  <li><a class="menu_opcion" href="{{ url_for('interface_patient',paciente_id = paciente_id) }}">
+      <div>
+        <i class='bx bxs-home'></i>
+        <span>INICIO</span>
+      </div>
+    </a></li>
+  <li><a class="menu_opcion activado"
+      href="{{ url_for('predict_section', paciente_id = paciente_id, paciente_name=paciente_name) }}">
+      <div>
+        <i class='bx bxs-search'></i>
+        <span>PREDECIR ENFERMEDAD</span>
+      </div>
+    </a></li>
+  <li><a class="menu_opcion" href="{{ url_for('index') }}">
+      <div>
+        <i class='bx bxs-exit'></i>
+        <span>CERRAR SESIÓN</span>
+      </div>
+    </a></li>
+</ul>
+{% endblock %}
+{% block content %}
+<div class="overlay_3">
+  <form class="sign_frm" method="post" action="{{ url_for('create_date',paciente_id = paciente_id,paciente_name=paciente_name) }}">
+    <div class="div_input">
+      <select id="doctor_d" name="doctor_d" class="frm_input">
+        {% for doctor in doctors %}
+        <option value="{{doctor[0]}}">{{doctor[1]}} {{doctor[2]}}</option>
+        {% endfor %}
+      </select>
+      <label for="doctor_d" class="lbl_input"><span class="txt_name">Seleccionar Doctor</span></label>
+    </div>
+    <div class="div_input">
+      <input type="datetime-local" id="fecha" name="fecha" class="frm_input" required />
+      <label for="fecha" class="lbl_input"><span class="txt_date">Fecha y Hora de atención</span></label>
+    </div>
+    <div class="div_input">
+      <select id="type_d" name="type_d" class="frm_input">
+        <option value="presencial">Presencial</option>
+        <option value="virtual">Virtual</option>
+      </select>
+      <label for="type_d" class="lbl_input"><span class="txt_name">Tipo de atención</span></label>
+    </div>
+    <div class="div_btn">
+      <button class="btn_send" type="submit">GUARDAR</button>
+    </div>
+  </form>
+</div>
+{% endblock %}

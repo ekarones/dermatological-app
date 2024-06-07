@@ -1,0 +1,67 @@
+{% extends "interface_doctor.html" %}
+{% block ul %}
+<ul class="nav_list">
+    <li><a class="menu_opcion" href="{{ url_for('interface_doctor',doctor_id = doctor_id) }}">
+            <div>
+                <i class='bx bxs-home'></i>
+                <span>INICIO</span>
+            </div>
+        </a></li>
+    <li><a class="menu_opcion" href="{{ url_for('show_record',doctor_id = doctor_id,doctor_name=doctor_name) }}"">
+            <div>
+                <i class='bx bx-list-ol'></i>
+                <span>MOSTRAR HISTORIAL</span>
+            </div>
+        </a></li>
+    <li><a class=" menu_opcion" href="{{ url_for('show_patients',doctor_id=doctor_id, doctor_name = doctor_name) }}">
+            <div>
+                <i class='bx bx-list-ol'></i>
+                <span>MOSTRAR PACIENTES</span>
+            </div>
+        </a></li>
+    <li><a class="menu_opcion activado" href="{{ url_for('show_dates',doctor_id=doctor_id, doctor_name=doctor_name) }}">
+            <div>
+                <i class='bx bx-list-check'></i>
+                <span>MOSTRAR CITAS</span>
+            </div>
+        </a></li>
+    <li><a class="menu_opcion" href="{{ url_for('index') }}">
+            <div>
+                <i class='bx bxs-exit'></i>
+                <span>CERRAR SESIÓN</span>
+            </div>
+        </a></li>
+</ul>
+{% endblock %}
+{% block content %}
+<div class="overlay_3">
+    <h1>REGISTRO DE CITAS DE LOS PACIENTES</h1>
+    <div class="patients_table">
+        <table>
+            <tr>
+                <!-- <th>ID</th> -->
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>DNI</th>
+                <th>Teléfono</th>
+                <th>Correo</th>
+                <th>Diagnóstico</th>
+                <th>Fecha de atención</th>
+                <th>Tipo de atención</th>
+            </tr>
+            {% for d in dates %}
+            <tr>
+                <td>{{ d[6] }}</td>
+                <td>{{ d[7] }}</td>
+                <td>{{ d[8] }}</td>
+                <td>{{ d[9] }}</td>
+                <td>{{ d[11] }}</td>
+                <td>{{ d[13] }}</td>
+                <td>{{ d[3] }}</td>
+                <td>{{ d[4] }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+</div>
+{% endblock %}
