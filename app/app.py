@@ -6,6 +6,7 @@ import joblib
 import numpy as np
 import cv2
 import shutil
+from datetime import datetime
 from cnn import validate_image
 from correo import enviar_correo
 
@@ -392,11 +393,11 @@ def upload_image(paciente_id, paciente_name):
                     paciente_name,
                     normalized_confidence,
                 )
-
                 # AGREGAR A REGISTROS
+                current_time = datetime.now()
                 cursor.execute(
-                    "INSERT INTO Record (id_patient, image_url,disease) VALUES ( ?, ?, ?)",
-                    (paciente_id, image_name, "Psoriasis"),
+                    "INSERT INTO Record (id_patient, image_url,disease,r_date) VALUES ( ?, ?, ?, ?)",
+                    (paciente_id, image_name, "Psoriasis", current_time),
                 )
 
                 conn.commit()
@@ -426,9 +427,10 @@ def upload_image(paciente_id, paciente_name):
                 )
 
                 # AGREGAR A REGISTROS
+                current_time = datetime.now()
                 cursor.execute(
-                    "INSERT INTO Record (id_patient, image_url,disease) VALUES ( ?, ?, ?)",
-                    (paciente_id, image_name, "Rosacea"),
+                    "INSERT INTO Record (id_patient, image_url,disease,r_date) VALUES ( ?, ?, ?, ?)",
+                    (paciente_id, image_name, "Rosacea", current_time),
                 )
 
                 conn.commit()
@@ -461,9 +463,10 @@ def upload_image(paciente_id, paciente_name):
                 )
 
                 # AGREGAR A REGISTROS
+                current_time = datetime.now()
                 cursor.execute(
-                    "INSERT INTO Record (id_patient, image_url,disease) VALUES ( ?, ?, ?)",
-                    (paciente_id, image_name, "Sarpullido"),
+                    "INSERT INTO Record (id_patient, image_url, disease, r_date) VALUES ( ?, ?, ?, ?)",
+                    (paciente_id, image_name, "Sarpullido", current_time),
                 )
 
                 conn.commit()
@@ -493,9 +496,10 @@ def upload_image(paciente_id, paciente_name):
                 )
 
                 # AGREGAR A REGISTROS
+                current_time = datetime.now()
                 cursor.execute(
-                    "INSERT INTO Record (id_patient, image_url,disease) VALUES ( ?, ?, ?)",
-                    (paciente_id, image_name, "Vitiligo"),
+                    "INSERT INTO Record (id_patient, image_url, disease, r_date) VALUES ( ?, ?, ?, ?)",
+                    (paciente_id, image_name, "Vitiligo", current_time),
                 )
 
                 conn.commit()
