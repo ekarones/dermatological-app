@@ -62,3 +62,39 @@ def enviar_correo(destinatario, diagnostico, name, confidence):
         print("Correo enviado exitosamente.")
     except Exception as e:
         print(f"Error al enviar el correo: {e}")
+
+
+def enviar_correo_cita(destinatario ,name, date_cite,):
+    email = EmailMessage()
+    email["From"] = remitente
+    email["To"] = destinatario
+    email["Subject"] = "Confirmación de cita médica"
+
+    mensaje = f"""
+    Estimado/a {name},
+
+    Espero que este mensaje te encuentre bien. Quería confirmarte que hemos recibido tu solicitud de cita médica a través de nuestra plataforma en línea. A continuación, los detalles de la cita:
+
+    Fecha: {date_cite[:10]}
+    Hora: {date_cite[11:]}
+    Especialidad médica: Dermatología
+    Por favor, asegúrate de llegar a tiempo y llevar contigo cualquier documentación de identidad. Si necesitas reprogramar la cita o tienes alguna pregunta, no dudes en contactarnos.
+
+    ¡Esperamos verte pronto!
+
+    Saludos cordiales
+    """
+
+    email.set_content(mensaje)
+
+    servidor_smtp = "smtp.gmail.com"
+    puerto_smtp = 587
+
+    try:
+        with smtplib.SMTP(servidor_smtp, puerto_smtp) as servidor:
+            servidor.starttls()
+            servidor.login(remitente, contraseña)
+            servidor.send_message(email)
+        print("Correo enviado exitosamente.")
+    except Exception as e:
+        print(f"Error al enviar el correo: {e}")

@@ -8,7 +8,7 @@ import cv2
 import shutil
 from datetime import datetime
 from cnn import validate_image
-from correo import enviar_correo
+from correo import enviar_correo, enviar_correo_cita
 
 base_dir = os.path.abspath(os.path.dirname(__file__))
 database_path = os.path.join(base_dir, "database", "my_database.db")
@@ -213,8 +213,12 @@ def create_date(paciente_id, paciente_name):
             "INSERT INTO Date (id_patient, id_doctor, date, type) VALUES ( ?, ?, ?, ?)",
             (id_paciente, id_doctor, date, type),
         )
+        cursor.execute("SELECT email FROM Patients WHERE id = ?", (paciente_id,))
+        paciente_correo = cursor.fetchone()
+        enviar_correo_cita(paciente_correo[0], paciente_name, date)
         conn.commit()
         conn.close()
+        # Enviar correo
         return render_template(
             "date_ok.html", paciente_id=paciente_id, paciente_name=paciente_name
         )
